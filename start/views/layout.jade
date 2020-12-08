@@ -1,0 +1,157 @@
+doctype html
+html
+  head
+    title= title
+    
+    meta(property='og:url', content='http://kartsinteraction.com')
+    meta(property='og:type', content='website')
+    meta(property='og:title', content='Interaction_Practice')
+    meta(property='og:description', content='Interaction 작업 결과물를 위한 website')
+    meta(property='og:image', content='http://220.230.119.76:3000/Posts/13/Baek_SeongYeol/thumbnail.png')
+    
+    link(href ="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="shortcut icon" href="#")
+    
+    // Global site tag (gtag.js) - Google Analytics
+    script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-156555035-1')
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-156555035-1');
+      
+    meta(charset='UTF-8')
+    script(src='/javascripts/jquery-3.4.1.min.js')
+    script(src='/javascripts/Responsive.js')
+
+    style.
+        
+      *{
+        height : 100%;
+        
+        margin:0;
+        padding:0;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-weight: light;
+        font-kerning: auto;
+        line-height : 28.5px;
+        letter-spacing: 0px;
+
+        //overflow : hidden;
+      }
+      
+      a:link { color: rgb(80,80,80); text-decoration: none;}
+      a:visited { color: rgb(150,150,150); text-decoration: none;}
+      a:hover { color: rgb(150,150,150); text-decoration: none;}
+      
+      nav {
+        position : absolute;  
+        z-index: 10;
+        height : 0px;        
+        width : 98%;
+        
+        transition : 0.4s;
+      }
+      
+      #indexbutton{
+        height : 0px;
+        width : 0px;
+        overflow : hidden;
+      }
+      
+      #indexLine{
+        width : 100%;
+        height : 5px;
+        background-color : rgb(150,150,150);
+        margin-top : 8px;
+      }
+
+      .index{
+        z-index : 9;
+        float : left;
+        position : fixed;
+        width : 250px;
+        height : auto;
+        min-height : 100%;
+        
+        text-align : left;
+        transition : 0.25s;
+        overflow : hidden;
+        
+        border-right-width : 1px;
+        border-right-style : dotted;
+        border-right-color : black;
+        
+        
+        background-color : white;
+      }
+      
+      .index_P{
+        margin-left : 45px;
+        margin-bottom : 30px;
+        font-size : 20px;
+        
+        color : rgb(150,150,150);
+        
+      }
+      
+      #home{
+        margin-top : 150px;
+      }
+      
+      #indexform{
+        display : none;
+      }
+      
+      @media (max-width:980px) {
+        nav{
+          height : 55px;
+          padding-top : 10px;
+          padding-left : 10px;
+        }
+        
+        #indexbutton{
+          margin-top : 5px;
+          margin-left : 5px;
+          height : 50px;
+          width : 50px;
+        }
+        
+        .index{
+          position : absolute;
+          width : 0px;
+        }
+        
+        .index_P{
+          font-size : 20px;
+          margin-bottom : 40px;
+        }
+      }  
+
+  body
+    nav
+      div#indexbutton
+        hr#indexLine
+        hr#indexLine
+        hr#indexLine
+      div#indexform
+        - for(var i = 1; i < 7; i++ ){
+            form(name='move' + i, action='/', method='POST')
+              input(type='hidden', name='number', value = i)
+        - }
+    div.index
+      div.index_Contents
+        p.index_P#home 
+          a(href='/') Home 
+        p.index_P 
+          a(href='#', onclick='javascript:document.move1.submit();') Preface
+        p.index_P 
+          a(href='#', onclick='javascript:document.move2.submit();') Murder
+        p.index_P 
+          a(href='#', onclick='javascript:document.move3.submit();') Violence
+        p.index_P 
+          a(href='#', onclick='javascript:document.move4.submit();') Sexual assault
+        p.index_P 
+          a(href='#', onclick='javascript:document.move6.submit();') Theft
+    block content

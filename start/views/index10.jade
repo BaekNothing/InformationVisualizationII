@@ -1,0 +1,251 @@
+extends layout.jade
+<!-- 주석테스트 -->
+
+block content
+  script.
+    $(document).ready(function () {
+      
+      $('#indexbutton').click(function(){
+        if($('.index').width() < 200)
+        { $('.index').css('width', '250px') }
+        else
+        { $('.index').css('width', '0px') }
+      });        
+      
+      if ($(window).width() < 985 )
+      {  $('#contents').css('width', '99%');}
+      else 
+      {  $('#contents').css('width', '100%').css('width', '-=250px'); }
+
+      
+      if ($(window).width() < 985 )
+      {  $('#head_TempDiv').css('width', '99%');}
+      else 
+      {  $('#head_TempDiv').css('width', '100%').css('width', '-=250px'); }
+
+      $(window).resize(function() { 
+        // 컨텐츠박스 리사이징 
+        if ($(window).width() < 985 )
+        {  
+          $('#contents').css('width', '99%')
+          $('.index').css('width', '0px') // index 리사이징
+          $('#head_TempDiv').css('width', '99%');   
+        }
+        else 
+        {  
+          $('.index').css('width', '250px') // index 리사이징  
+          $('#contents').css('width', '100%').css('width', '-=250px'); //컨텐츠박스 리사이징 
+          $('#head_TempDiv').css('width', '100%').css('width', '-=250px');
+        }
+      });
+    });
+
+  style.
+    #contents{
+      float : right;
+      //height : 500%;
+      background-color : white;
+      text-align : center;
+      
+      transition : 0s;
+    }
+    
+    #content_head{
+      
+      width : 100%;
+      height : 300px;
+      
+      border-bottom-width : 1px;
+      border-bottom-style : dotted;
+      border-bottom-color : black;
+      
+    }
+    
+    #head_TempDiv{
+      z-index : 2;
+      position : absolute;
+      height : 300px;
+      text-align : center;
+    }
+    
+    #head_Title{
+      
+      padding-top : 130px;  
+      font-size: 32px;
+      font-weight: bold;
+      font-kerning: auto;
+      line-height : 25.5px;
+      letter-spacing: -1px;
+      text-shadow: 5px 5px 5px lightGray;
+      
+      color : black;
+    }
+    
+    #headimage{
+      z-indes : -10;
+      position : absolute;
+      margin-left : -250px;
+      width : 100%;
+      height : 300px;
+      overflow : hidden;
+    
+    }
+    
+    .image{
+      z-indes : -10;
+      width : 100%;
+      height : auto;
+    }
+    
+    
+    
+    #content_Main{
+      display : inline-block;
+      width : 75%;
+      height : 120%;
+      text-align : left;
+      margin-top : 20px;
+      
+      background-color : white;
+    }
+    
+    .content_P{
+      padding : 2px;
+      padding-top : 20px;
+      padding-bottom : 0px;
+      height : auto;
+      
+      font-size: 18px;
+      font-weight: thin;
+      font-kerning: auto;
+      line-height : 36.5px;
+      letter-spacing: -1px;
+      
+      color : rgb(120,120,120); 
+    }
+    
+    .contentHR{
+      margin-top : 45px;
+      margin-bottom : 45px;
+    }
+    
+    #title{
+      font-weight: bold;
+    }
+    
+    #name {
+      font-weight : light;
+      font-size : 16px;
+    }
+    
+    #video-wrap {
+      z-index = 10;
+      margin-top : 80px;
+      margin-bottom : 35px;
+      
+      margin-left : 0.7%;
+      width : 98%;
+      
+      position : relative; 
+      padding-bottom : 56.25%; 
+      padding-top : 30px; 
+      height : 0; 
+      overflow : hidden;
+    }
+    #video-wrap iframe,
+    #video-wrap object,
+    #video-wrap embed {
+      position : absolute; 
+      top : 0; 
+      left : 0; 
+      width : 100%; 
+      height : 100%;
+    }
+
+    #DetailYoutube{
+        position : absolute;
+    }
+    
+    .Bottom{
+      margin-top : 100px;
+      height : 100px;
+    }
+    
+    @media (max-width:980px) {
+      #contents{
+        width : 99%;
+        margin-right : 0.5%;
+      }
+      
+      #content_head{
+        height : 250px;
+      }
+      
+      #headimage{
+        height : 250px;
+      }
+      
+      #content_Main{
+        width : 90%;
+        padding-left : 4.5%;
+        padding-right : 4.5%;
+      }
+      
+      #headimage{
+        width : 99%;
+        margin-left : 0px;
+      }
+      
+      #head_Title{
+        font-size : 28px;
+      }
+      
+      #title{
+        font-size : 20px;
+      }
+      
+      #name{
+        font-size : 20px;
+      }
+      
+      
+      .contentHR{
+        margin-top : 25px;
+        margin-bottom : 25px;
+      }
+      
+      #video-wrap{
+        margin-top : 45px;
+        margin-bottom : 0px;
+      }
+      
+    }
+    
+  div#contents
+    div#content_head
+      div#headimage
+        //img.image(src='/Posts/13/index1title.png')
+      div#head_TempDiv
+        p#head_Title Emogif
+    div#content_Main
+      div.content_P
+        p.content_P#title fun하고 편한 GIF
+        p.content_P#title Emogif
+        p.content_P#name 2016152009 김현
+        p.content_P
+        hr.contentHR
+      div#video-wrap
+        embed#DetailYoutube(src="https://www.youtube.com/embed/vE1M7ZT7TXI" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture')
+      div#video-wrap
+        embed#DetailYoutube(src="https://www.youtube.com/embed/Jx29tLpOyMs" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture')
+      div#video-wrap
+        embed#DetailYoutube(src="https://www.youtube.com/embed/LPet5Bwcj7g" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture')
+      div#video-wrap
+        embed#DetailYoutube(src="https://www.youtube.com/embed/RNK2eg7Fw7Q" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture')
+      div.content_P
+        hr.contentHR
+        p.content_P
+        p.content_P#body 우리는 생각보다 비언어의 힘을 간과하고 있습니다. <br> 평소에 말을 할 때에, 말의 내용만 좋으면 된다고 생각하지만 실제로는 그렇지 않습니다. <br> 말의 높낮이나 억양, 목소리 톤, 몸으로 취하는 제스쳐가 의사소통에서 차지하는 비중이 절반을 훌쩍 넘습니다. <br> 저는 그래서 이 부분에 집중하여 이러한 비언어/반언어적 의사소통을 포함시키면서도, 현재의 메신저 스타일의 소통 방법에서 크게 벗어나지 않는 방법으로 디자인 결과물을 이끌어내고 싶었습니다. 그래서 emogif라는 결과물이 나왔고요. 사람들은 기존에 하듯이 gif를 쓰기만 하면 되고, 불편했던 gif찾기는 자동으로 이루어지는 것이죠.
+        p.content_P 
+        p.content_P
+        p.Bottom
