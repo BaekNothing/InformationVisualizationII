@@ -9,7 +9,7 @@ var path = './public/Posts';
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    res.render('Home', { title: 'Interaction_practice' });
+    res.render('Home', { title: 'Sloped_News_Title' });
 
 });
 
@@ -22,14 +22,14 @@ router.get('/', function(req, res, next) {
 router.get('/:number', function(req,res,next){
 
     var pageID = req.params.number;
-    res.render('index'+ pageID,{ title:'Interaction_practice'})
+    res.render('index'+ pageID,{ title:'Sloped_News_Title'})
 })
 
 router.post('/', function(req,res,next){
 
     var pageID = req.body.number;
 
-    res.render('index'+ pageID,{ title:'Interaction_practice'})
+    res.render('index'+ pageID,{ title:'Sloped_News_Title'})
 })
 
 
