@@ -13,7 +13,7 @@ var http = require('http');
  */
 
 /*도메인 발급받기 전까지는 3000으로 둘 것*/
-var port = normalizePort(process.env.PORT || '80');
+var port = normalizePort(process.env.PORT || '2020');
 app.set('port', port);
 
 /**
