@@ -136,7 +136,7 @@ html
         hr#indexLine
         hr#indexLine
       div#indexform
-        - for(var i = 1; i < 7; i++ ){
+        - for(var i = 1; i < 6; i++ ){
             form(name='move' + i, action='/', method='POST')
               input(type='hidden', name='number', value = i)
         - }
@@ -152,6 +152,4 @@ html
           a(href='#', onclick='javascript:document.move3.submit();') Violence
         p.index_P 
           a(href='#', onclick='javascript:document.move4.submit();') Sexual assault
-        p.index_P 
-          a(href='#', onclick='javascript:document.move6.submit();') Theft
     block content

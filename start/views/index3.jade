@@ -5,12 +5,63 @@ block content
   script.
     $(document).ready(function () {
       
+      var colorCode = "#" + Math.round(Math.random() * 0xffffff).toString(16);
+      var colorCode2 = "#" + Math.round(Math.random() * 0xffffff).toString(16);
+      
       $('#indexbutton').click(function(){
         if($('.index').width() < 200)
         { $('.index').css('width', '250px') }
         else
         { $('.index').css('width', '0px') }
-      });        
+      });     
+      
+      
+      var clicked = 0;
+      $('.dotsdiv').click(function(){
+        
+        
+        if(clicked == 0)
+        { 
+          
+          number = event.target.id;
+          $('#dotsPopup').css('visibility', 'visible');
+          
+          var popupTextTitle = $('#title'+number).text();
+          var popupTextDate = $('#Date'+number).text();
+          var popupTextSum = $('#Sum'+number).text();          
+          var popupAttacker = $('#attacker'+number).text();          
+          $('#popupHead').text( popupTextTitle );
+          $('#popupDate').text( "날짜 : " + popupTextDate );
+          $('#popupSum').text( "우호지수 : " + popupTextSum );
+          
+          if( popupAttacker == '남성' ){    
+              if ( popupTextSum >= 0 ){
+                //alert(popupAttacker);
+                $('#popupResult').text("남성 가해자에게 우호적"); }
+              else {
+                $('#popupResult').text("남성 가해자에게 적대적"); 
+              }
+              } 
+          else { 
+              if ( 
+                popupTextSum >= 0 ){ $('#popupResult').text("여성 가해자에게 우호적"); 
+              }
+              else { 
+                $('#popupResult').text("여성 가해자에게 적대적"); 
+              }
+          }
+          
+          
+          clicked = 1;
+        }   
+      });
+      
+      $('#popupExit').click(function(){
+        
+        $('#dotsPopup').css('visibility', 'hidden') 
+        clicked = 0;
+        
+      });
       
       if ($(window).width() < 985 )
       {  $('#contents').css('width', '99%');}
@@ -38,6 +89,22 @@ block content
           $('#head_TempDiv').css('width', '100%').css('width', '-=250px');
         }
       });
+      
+      
+      $('.legendMale').css('background-color', colorCode);
+      $('#dots3남성').css('background-color', colorCode);
+      $('#dots2남성').css('background-color', colorCode);
+      $('#dots1남성').css('background-color', colorCode);
+      $('#dots0남성').css('background-color', colorCode);
+      $('#dots-1남성').css('background-color', colorCode);
+      $('#dots-2남성').css('background-color', colorCode);
+      
+      $('.legendFemale').css('background-color', colorCode2);
+      $('#dots2여성').css('background-color', colorCode2);
+      $('#dots1여성').css('background-color', colorCode2);
+      $('#dots0여성').css('background-color', colorCode2);
+      $('#dots-1여성').css('background-color', colorCode2);
+      $('#dots-2여성').css('background-color', colorCode2);
     });
 
   style.
@@ -48,12 +115,13 @@ block content
       text-align : center;
       
       transition : 0s;
+      //pointer-events:none;
     }
     
     #content_head{
       
       width : 100%;
-      height : 300px;
+      height : 180px;
       
       border-bottom-width : 1px;
       border-bottom-style : dotted;
@@ -64,13 +132,12 @@ block content
     #head_TempDiv{
       z-index : 2;
       position : absolute;
-      height : 300px;
+      height : 150px;
       text-align : center;
     }
     
     #head_Title{
-      
-      padding-top : 130px;  
+      padding-top : 80px;  
       font-size: 32px;
       font-weight: bold;
       font-kerning: auto;
@@ -86,7 +153,7 @@ block content
       position : absolute;
       margin-left : -250px;
       width : 100%;
-      height : 300px;
+      height : 200px;
       overflow : hidden;
     
     }
@@ -96,7 +163,6 @@ block content
       width : 100%;
       height : auto;
     }
-    
     
     
     #content_Main{
@@ -111,7 +177,7 @@ block content
     
     .content_P{
       padding : 2px;
-      padding-top : 20px;
+      padding-top : 8px;
       padding-bottom : 0px;
       height : auto;
       
@@ -125,17 +191,66 @@ block content
     }
     
     .contentHR{
-      margin-top : 45px;
-      margin-bottom : 45px;
+      margin-top : 30px;
+      margin-bottom : 20px;
     }
     
     #title{
       font-weight: bold;
+      width : 80%;
     }
     
     #name {
       font-weight : light;
       font-size : 16px;
+      width : 80%;
+    }
+    
+    .legend{
+      float : right;
+      width : 200px;
+      height : 80px;
+      margin-right : -30px;
+      margin-top : -85px;
+    }
+    .legendBlock{
+      display : inline-block;
+      width : 90px;
+      height : 35px;
+      margin-top : 10px;
+      margin-left : 10px;
+    }
+    
+    .legendMale{
+      margin-left : -30px;
+      margin-bottom : -35px;
+      width : 20px;
+      height : 20px;
+      background-color : lightGray;
+      opacity : 0.75;
+    }
+    .legendFemale{
+      margin-left : -30px;
+      margin-bottom : -35px;
+      width : 20px;
+      height : 20px;
+      background-color : lightGray;
+      opacity : 0.75;
+    }
+    .legendGood{
+      margin-left : -30px;
+      margin-bottom : -35px;
+      width : 20px;
+      height : 20px;
+      background-color : lightGray;
+      border-radius : 10px;
+    }
+    .legendBad{
+      margin-left : -30px;
+      margin-bottom : -35px;
+      width : 20px;
+      height : 20px;
+      background-color : lightGray;
     }
     
     #video-wrap {
@@ -171,6 +286,147 @@ block content
       height : 100px;
     }
     
+    
+    .dots{
+      list-style :none;
+      margin : 10px;
+      height : 20px;
+      width : 20px;
+      border-radius:10px;
+      float : left;
+      
+      background-color : black;  
+    }
+    
+    #dots0남성{
+      opacity : 0.1;
+    }
+    
+    #dots1남성{
+      opacity : 0.65;
+    }
+    
+    #dots2남성{
+      opacity : 0.1;
+    }
+    
+    #dots-1남성{
+      opacity : 0.65;
+      border-radius : 0px;
+    }
+    
+    #dots-2남성{
+      opacity : 0.1;
+      border-radius : 0px;
+    }
+    
+    
+    #dots0여성{
+      background-color : red;
+      opacity : 0.1;
+    }
+    
+    #dots1여성{
+      background-color : red;
+      opacity : 0.65;
+    }
+    
+    #dots2여성{
+      background-color : red;
+      opacity : 0.1;
+    }
+    
+    #dots-1여성{
+      background-color : red;
+      opacity : 0.65;
+      border-radius : 0px;
+    }
+    
+    #dots-2여성{
+      background-color : red;
+      opacity : 0.1;
+      border-radius : 0px;
+    }
+    
+    #dotsContainer{
+      
+      margin :10;
+      padding :0;
+      position : relative; 
+    }
+    
+    .dotsdiv{
+        background-color : 0,0,1;
+        z-index = 30;
+        pointer-events: fill;
+    }
+    
+    .dotsContainerDiv{
+      
+      // 넓이 지정하면 dots들이 좁아짐
+      
+    }
+    
+    #dotsPopup{
+      
+      position : absolute;
+      
+      width : 60%;
+      height : 300px;
+      z-index = 1;
+      background-color : white;
+      text-align : center;
+      //pointer-events: none;
+      border-width : thin;
+      border-style : solid;
+      border-color : lightGray;
+      
+      box-shadow : 20px 20px 20px lightGray;
+      visibility : hidden;
+    }
+    
+    #popupExit{
+      float : right;
+      background-color : red;
+      width : 25px;
+      height : 25px;
+      margin : 10px;
+      border-radius : 20px;
+      pointer-events: fill;
+    }
+    
+    #popupDate{
+      float : left;
+      height : 25px;
+      margin-left : 20px;
+      margin-top : -4px;
+      
+      font-size : 16px;
+    }
+    
+    
+    #popupHead{
+        margin-top : 22px;
+        margin-bottom : 25px;
+        margin-right : 25px;
+        margin-left : 25px; 
+        font-weight: bold;
+        font-size : 34px;
+        color : black;
+    }
+    
+    
+    #popupSum{
+      
+        font-weight: bold;
+        color : black;
+        margin=bottom : 10px;
+    }
+    
+    .nondisplayContents{
+        visibility : hidden;
+    }
+    
     @media (max-width:980px) {
       #contents{
         width : 99%;
@@ -178,7 +434,7 @@ block content
       }
       
       #content_head{
-        height : 250px;
+        height : 200px;
       }
       
       #headimage{
@@ -219,6 +475,12 @@ block content
         padding-bottom : 90%; 
       }
       
+      #dotsPopup{
+        
+        width : 88%;
+        
+      }
+    
     }
     
   div#contents
@@ -226,20 +488,42 @@ block content
       div#headimage
         //img.image(src='/Posts/13/index1title.png')
       div#head_TempDiv
-        p#head_Title 분류.폭행 (Violence)
+        p#head_Title 분류. 폭행 (Violence)
     div#content_Main
       div.content_P
-        p.content_P#title 폭행사건을 다룬 뉴스 기사의 성별 기울기
-        p.content_P#name 현재 4433건 中 0건 반영됨
-        p.content_P
-        hr.contentHR
-      div#video-wrap
-        //embed#DetailYoutube(src="https://www.youtube.com/embed/_zaPa8NBMO0" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture')
+        p.content_P#title 폭행사건을 다룬 뉴스 기사의 성별 기울기  
+        p.content_P#name 2020.12월~2020.10월 총 #{pageData.length}건의 기사
+        div.legend
+          div.legendBlock
+            div.legendMale
+            p.content_P 남성
+          div.legendBlock
+            div.legendFemale
+            p.content_P 여성
+          div.legendBlock
+            div.legendGood
+            p.content_P 우호적
+          div.legendBlock
+            div.legendBad
+            p.content_P 적대적
       div.content_P
         hr.contentHR
-        p.content_P
-        p.content_P#body 
-        p.content_P#body  
-        p.content_P 
-        p.content_P
-        p.Bottom
+        div.dotsContainerDiv
+          ul#dotsContainer
+          -for (var i = 0; i<pageData.length; i++)
+            li(class = 'dots' id = 'dots'+pageData[i]['Sum']+pageData[i]['attacker']) 
+              div(class='dotsdiv' id = i)
+                p(class = 'nondisplayContents' id = 'title' + i) #{pageData[i]['title']}
+                p(class = 'nondisplayContents' id = 'Sum' + i) #{pageData[i]['Sum']}
+                p(class = 'nondisplayContents' id = 'Date' + i) #{pageData[i]['date']}
+                p(class = 'nondisplayContents' id = 'attacker' + i) #{pageData[i]['attacker']}
+        div#dotsPopup 
+          div#popupExit  
+          p.content_P#popupDate 20201216
+          p.content_P <br>
+          p.content_P#popupHead 테스트 타이틀 <br>
+          p.content_P#popupSum 우호지수 : 
+          p.content_P#popupResult 테스트텍스트
+          
+            
+        
